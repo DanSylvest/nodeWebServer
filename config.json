@@ -14,8 +14,8 @@
         "gif":    ["image/gif", "binary"],
         "ico":    ["text/plain; charset=utf-8"],
         "ttf":    ["application/font-woff"],
-        "woff":   ["application/font-woff", "binary"],
-        "woff2":  ["application/font-woff", "binary"],
+        "woff":   ["application/font-woff"],
+        "woff2":  ["application/font-woff"],
         "map":    ["application/font-woff"]
     }
 }
