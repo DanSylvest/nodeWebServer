@@ -3,19 +3,19 @@
     "default_file": "index.html",
     "web_root": "/root/work/mapper-beta",
     "types": {
-        "html":   ["text/html"],
-        "txt":    ["text/plain"],
-        "css":    ["text/css"],
-        "svg":    ["image/svg+xml"],
-        "js":     ["application/x-javascript"],
-        "map":    ["application/x-javascript"],
-        "jpg":    ["image/jpeg", "binary"],
-        "jpeg":   ["image/jpeg", "binary"],
-        "png":    ["image/png", "binary"],
-        "gif":    ["image/gif", "binary"],
-        "ico":    ["text/plain; charset=utf-8"],
-        "ttf":    ["application/x-font-ttf", "binary"],
-        "woff":   ["application/font-woff", "binary"],
-        "woff2":  ["application/font-woff2", "binary"]
+        "html":   {"mime":"text/html"},
+        "txt":    {"mime":"text/plain"},
+        "css":    {"mime":"text/css"},
+        "svg":    {"mime":"image/svg+xml"},
+        "js":     {"mime":"application/x-javascript"},
+        "map":    {"mime":"application/x-javascript"},
+        "jpg":    {"mime":"image/jpeg", "binary": true},
+        "jpeg":   {"mime":"image/jpeg", "binary": true},
+        "png":    {"mime":"image/png", "binary": true},
+        "gif":    {"mime":"image/gif", "binary": true},
+        "ico":    {"mime":"text/plain; charset=utf-8"},
+        "ttf":    {"mime":"application/x-font-ttf"},
+        "woff":   {"mime":"application/font-woff"},
+        "woff2":  {"mime":"application/font-woff2"}
     }
 }
