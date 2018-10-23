@@ -1,5 +1,5 @@
 {
-  "port": 3020,
+  "port": 80,
   "default_file": "index.html",
-  "web_root": ""
+  "web_root": "/root/work/mapper-beta"
 }

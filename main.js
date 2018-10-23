@@ -116,6 +116,10 @@ var valid_type = function (_file) {
         case "png":
         case "PNG":
         case "ico":
+        case "ttf":
+        case "woff":
+        case "woff2":
+        case "map":
             return true;
         default:
             return false;
