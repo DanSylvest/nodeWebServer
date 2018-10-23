@@ -66,7 +66,7 @@ var requestHandler = function(request, response) {
                     // response.contentLength = contents.size;
                     if(type_info[1]){
 
-                        response.end(contents, type_info[1]);
+                        response.send(contents, type_info[1]);
                     } else {
                         response.end(contents);
                     }
