@@ -49,10 +49,10 @@ var requestHandler = function(request, response) {
         console.log("RESULT PATH: ", fpath);
         if(load_file && fs.existsSync(fpath)) {
             fs.readFile(fpath, 'utf8', function (err, contents) {
-                if(!err){
+                if (!err) {
                     var type_info = Config.types[type];
-                    response.writeHead(200, {"Content-Type": type_info });
-                    response.end(contents);
+                    response.writeHead(200, {"Content-Type": type_info[0]});
+                    response.end(contents, type_info[1] ? type_info[1] : undefined);
                 } else {
                     console.log("");
                     console.log(" ========== ERROR ==========");
@@ -60,7 +60,7 @@ var requestHandler = function(request, response) {
                     console.log(" ========== ERROR ==========");
                     console.log("");
 
-                    response.writeHead(200, {"Content-Type": "text/plain; charset=utf-8" });
+                    response.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"});
                     response.end("error on load file");
                 }
             });
