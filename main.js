@@ -59,14 +59,14 @@ var requestHandler = function(request, response) {
                     // response.writeHead(200, {"Content-Type": type_info[0]});
                     response.writeHead(200, {
                         'Content-Type': type_info[0],
-                        // "Content-Length": Buffer.byteLength(contents)
+                        "Content-Length": contents.size
                     });
                     // response.statusCode = 200;
                     // response.contentType = type_info[0];
                     // response.contentLength = contents.size;
                     if(type_info[1]){
 
-                        response.send(contents, type_info[1]);
+                        response.end(contents, type_info[1]);
                     } else {
                         response.end(contents);
                     }
