@@ -57,7 +57,13 @@ var requestHandler = function(request, response) {
                     var type_info = Config.types[type];
                     console.log("type_info", JSON.stringify(type_info));
                     response.writeHead(200, {"Content-Type": type_info[0]});
-                    response.end(contents, type_info[1] ? type_info[1] : undefined);
+
+                    if(type_info[1]){
+                        response.end(contents, type_info[1]);
+                    } else {
+                        response.end(contents);
+                    }
+
                 } else {
                     console.log("");
                     console.log(" ========== ERROR ==========");
