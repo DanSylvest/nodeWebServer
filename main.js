@@ -23,13 +23,17 @@ var requestHandler = function(request, response) {
 
         var rel_path;
         var load_file = false;
+        var type;
         if(!info.is_file) {
+            type = get_type(ROOT_FILE);
             console.log("TYPE: PATH");
             rel_path = url.path + ROOT_FILE;
             load_file = true;
         } else {
             console.log("TYPE: FILE");
-            if(valid_type(info.file)){
+            type = get_type(info.file);
+
+            if(valid_type(type)){
                 console.log("VALID TYPE");
                 rel_path = url.path;
                 load_file = true;
@@ -46,6 +50,8 @@ var requestHandler = function(request, response) {
         if(load_file && fs.existsSync(fpath)) {
             fs.readFile(fpath, 'utf8', function (err, contents) {
                 if(!err){
+                    var type_info = Config.types[type];
+                    response.writeHead(200, {"Content-Type": type_info });
                     response.end(contents);
                 } else {
                     console.log("");
@@ -54,15 +60,18 @@ var requestHandler = function(request, response) {
                     console.log(" ========== ERROR ==========");
                     console.log("");
 
+                    response.writeHead(200, {"Content-Type": "text/plain; charset=utf-8" });
                     response.end("error on load file");
                 }
             });
         } else {
             console.log("NO LOADED: ", fpath);
+            response.writeHead(404, {"Content-Type": "text/plain; charset=utf-8" });
             response.end("url invalid or file does not exist");
         }
     } else {
         console.log("INVALID URL: ", request.url);
+        response.writeHead(404, {"Content-Type": "text/plain; charset=utf-8" });
         response.end("url invalid");
     }
 };
@@ -100,30 +109,22 @@ var valid_url = function (_url) {
     return !match;
 };
 
-var valid_type = function (_file) {
-    var arr = _file.split(".");
+var valid_type = function (_type) {
+    var t = Config.types[_type];
+    return t != undefined;
+};
 
-    if(arr.length == 1) return false;
+var get_type = function (_file_name) {
+    var arr = _file_name.split(".");
+    var type;
 
-    var type = arr[arr.length - 1];
-    switch (type) {
-        case "html":
-        case "css":
-        case "svg":
-        case "js":
-        case "img":
-        case "IMG":
-        case "png":
-        case "PNG":
-        case "ico":
-        case "ttf":
-        case "woff":
-        case "woff2":
-        case "map":
-            return true;
-        default:
-            return false;
+    if(arr.length == 1) {
+        type = "";
+    } else {
+        type = arr[arr.length - 1]
     }
+
+    return type;
 };
 
 var path_info = function (_path) {
