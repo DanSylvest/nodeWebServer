@@ -66,7 +66,8 @@ var requestHandler = function(request, response) {
                     // response.contentLength = contents.size;
                     if(type_info[1]){
                         console.log("BINARY: true");
-                        response.end(contents, type_info[1]);
+                        response.write(contents, type_info[1]);
+                        response.end();
                     } else {
                         console.log("BINARY: false");
                         response.end(contents);
