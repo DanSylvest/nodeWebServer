@@ -51,6 +51,7 @@ var requestHandler = function(request, response) {
             fs.readFile(fpath, 'utf8', function (err, contents) {
                 if (!err) {
                     var type_info = Config.types[type];
+                    console.log("type_info", JSON.stringify(type_info));
                     response.writeHead(200, {"Content-Type": type_info[0]});
                     response.end(contents, type_info[1] ? type_info[1] : undefined);
                 } else {

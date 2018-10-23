@@ -3,19 +3,19 @@
     "default_file": "index.html",
     "web_root": "/root/work/mapper-beta",
     "types": {
-        "html":   "text/html",
-        "txt":    "text/plain",
-        "css":    "text/css",
-        "svg":    "image/svg+xml",
-        "js":     "application/x-javascript",
-        "jpg":    "image/jpeg",
-        "jpeg":   "image/jpeg",
-        "png":    "image/png",
-        "gif":    "image/gif",
-        "ico":    "text/plain; charset=utf-8",
-        "ttf":    "text/plain; charset=utf-8",
-        "woff":   "text/plain; charset=utf-8",
-        "woff2":  "text/plain; charset=utf-8",
-        "map":    "text/plain; charset=utf-8"
+        "html":   ["text/html"],
+        "txt":    ["text/plain"],
+        "css":    ["text/css"],
+        "svg":    ["image/svg+xml"],
+        "js":     ["application/x-javascript"],
+        "jpg":    ["image/jpeg", "binary"],
+        "jpeg":   ["image/jpeg", "binary"],
+        "png":    ["image/png", "binary"],
+        "gif":    ["image/gif", "binary"],
+        "ico":    ["text/plain; charset=utf-8"],
+        "ttf":    ["text/plain; charset=utf-8"],
+        "woff":   ["text/plain; charset=utf-8"],
+        "woff2":  ["text/plain; charset=utf-8"],
+        "map":    ["text/plain; charset=utf-8"]
     }
 }
