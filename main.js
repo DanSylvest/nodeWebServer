@@ -57,16 +57,16 @@ var requestHandler = function(request, response) {
             if (type_info.binary) {
                 var contents = fs.readFileSync(fpath);
                 response.writeHead(200, {
-                    'Content-Type': type_info[0]
+                    'Content-Type': type_info.mime
                     // "Content-Length": Buffer.byteLength(contents)
                 });
-                response.write(contents, type_info[1]);
+                response.write(contents, 'binary');
                 response.end();
             } else {
                 fs.readFile(fpath, 'utf8', function (err, contents) {
                     console.log("LOAD RESPONSE: ", fpath);
                     response.writeHead(200, {
-                        'Content-Type': type_info[0]
+                        'Content-Type': type_info.mime
                         // "Content-Length": Buffer.byteLength(contents)
                     });
                     console.log("BINARY: false");
