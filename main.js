@@ -56,9 +56,12 @@ var requestHandler = function(request, response) {
                 if (!err) {
                     var type_info = Config.types[type];
                     console.log("type_info", JSON.stringify(type_info));
-                    response.writeHead(200, {"Content-Type": type_info[0]});
-
+                    // response.writeHead(200, {"Content-Type": type_info[0]});
+                    response.statusCode = 200;
+                    response.contentType = type_info[0];
+                    response.contentLength = contents.size;
                     if(type_info[1]){
+
                         response.end(contents, type_info[1]);
                     } else {
                         response.end(contents);
