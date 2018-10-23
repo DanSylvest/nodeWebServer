@@ -59,7 +59,7 @@ var requestHandler = function(request, response) {
                     // response.writeHead(200, {"Content-Type": type_info[0]});
                     response.writeHead(200, {
                         'Content-Type': type_info[0],
-                        "Content-Length": Buffer.byteLength(contents)
+                        // "Content-Length": Buffer.byteLength(contents)
                     });
                     // response.statusCode = 200;
                     // response.contentType = type_info[0];
