@@ -13,7 +13,7 @@
         "jpeg":   {"mime":"image/jpeg", "binary": true},
         "png":    {"mime":"image/png", "binary": true},
         "gif":    {"mime":"image/gif", "binary": true},
-        "ico":    {"mime":"text/plain; charset=utf-8"},
+        "ico":    {"mime":"text/plain; charset=utf-8", "binary": true},
         "ttf":    {"mime":"application/x-font-ttf", "binary": true},
         "woff":   {"mime":"application/font-woff", "binary": true},
         "woff2":  {"mime":"application/font-woff2", "binary": true}
