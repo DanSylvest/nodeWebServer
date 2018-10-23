@@ -8,14 +8,14 @@
         "css":    ["text/css"],
         "svg":    ["image/svg+xml"],
         "js":     ["application/x-javascript"],
+        "map":    ["application/x-javascript"],
         "jpg":    ["image/jpeg", "binary"],
         "jpeg":   ["image/jpeg", "binary"],
         "png":    ["image/png", "binary"],
         "gif":    ["image/gif", "binary"],
         "ico":    ["text/plain; charset=utf-8"],
-        "ttf":    ["application/font-woff"],
-        "woff":   ["application/font-woff"],
-        "woff2":  ["application/font-woff"],
-        "map":    ["application/font-woff"]
+        "ttf":    ["application/x-font-ttf", "binary"],
+        "woff":   ["application/font-woff", "binary"],
+        "woff2":  ["application/font-woff2", "binary"]
     }
 }
