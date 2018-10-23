@@ -48,7 +48,11 @@ var requestHandler = function(request, response) {
         console.log("rel_path: ", rel_path);
         console.log("RESULT PATH: ", fpath);
         if(load_file && fs.existsSync(fpath)) {
+            console.log("TRY LOAD: ", fpath);
+
             fs.readFile(fpath, 'utf8', function (err, contents) {
+                console.log("LOAD RESPONSE: ", fpath);
+
                 if (!err) {
                     var type_info = Config.types[type];
                     console.log("type_info", JSON.stringify(type_info));
