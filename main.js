@@ -65,9 +65,10 @@ var requestHandler = function(request, response) {
                     // response.contentType = type_info[0];
                     // response.contentLength = contents.size;
                     if(type_info[1]){
-
+                        console.log("BINARY: true");
                         response.end(contents, type_info[1]);
                     } else {
+                        console.log("BINARY: false");
                         response.end(contents);
                     }
 
