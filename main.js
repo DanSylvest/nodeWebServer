@@ -2,6 +2,7 @@
  * Created by Aleksey Chichenkov <a.chichenkov@initi.ru> on 10/23/18.
  */
 
+
 var http = require('http');
 var fs = require('fs');
 var Config = JSON.parse(fs.readFileSync("config.json", "utf8"));
@@ -111,8 +112,9 @@ var process_url = function (_url) {
     }
 };
 
+
 var valid_url = function (_url) {
-    var match = _url.match(/[^a-zA-Z0-9_\-+=?\\/\.]/);
+    var match = _url.match(/[^a-zA-Z0-9_\-+=?\\/\.&]/);
     return !match;
 };
 
