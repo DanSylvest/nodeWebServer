@@ -43,7 +43,6 @@ var requestHandler = function(request, response) {
         }
 
         var fpath = WEB_FOLDER + rel_path;
-        // console.log(load_file, rel_path);
         console.log("WEB_FOLDER: ", WEB_FOLDER);
         console.log("rel_path: ", rel_path);
         console.log("RESULT PATH: ", fpath);
@@ -58,7 +57,6 @@ var requestHandler = function(request, response) {
                 var contents = fs.readFileSync(fpath);
                 response.writeHead(200, {
                     'Content-Type': type_info.mime
-                    // "Content-Length": Buffer.byteLength(contents)
                 });
                 response.write(contents, 'binary');
                 response.end();
@@ -67,14 +65,11 @@ var requestHandler = function(request, response) {
                     console.log("LOAD RESPONSE: ", fpath);
                     response.writeHead(200, {
                         'Content-Type': type_info.mime
-                        // "Content-Length": Buffer.byteLength(contents)
                     });
                     console.log("BINARY: false");
                     response.end(contents);
                 });
             }
-
-
         } else {
             console.log("NO LOADED: ", fpath);
             response.writeHead(404, {"Content-Type": "text/plain; charset=utf-8" });

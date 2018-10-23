@@ -14,8 +14,8 @@
         "png":    {"mime":"image/png", "binary": true},
         "gif":    {"mime":"image/gif", "binary": true},
         "ico":    {"mime":"text/plain; charset=utf-8"},
-        "ttf":    {"mime":"application/x-font-ttf"},
-        "woff":   {"mime":"application/font-woff"},
-        "woff2":  {"mime":"application/font-woff2"}
+        "ttf":    {"mime":"application/x-font-ttf", "binary": true},
+        "woff":   {"mime":"application/font-woff", "binary": true},
+        "woff2":  {"mime":"application/font-woff2", "binary": true}
     }
 }
