@@ -2,6 +2,7 @@
     "port": 80,
     "default_file": "index.html",
     "web_root": "/root/work/mapper-beta",
+    "debug": false,
     "types": {
         "html":   {"mime":"text/html"},
         "txt":    {"mime":"text/plain"},

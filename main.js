@@ -9,49 +9,50 @@ var Config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 var port = Config.port || 3000;
 var ROOT_FILE = Config.default_file || "index.html";
 var WEB_FOLDER = Config.web_root || __dirname;
+var debug = Config.debug;
 
 var requestHandler = function(request, response) {
-    console.log("");
-    console.log("");
-    console.log("INCOMING URL: ", request.url);
+    debug && console.log("");
+    debug && console.log("");
+    debug && console.log("INCOMING URL: ", request.url);
     if(valid_url(request.url)) { // check chars in url
         var url = process_url(request.url); // get path and query
         var info = path_info(url.path); // getr info file or not file
 
-        console.log("URL INFO: ", JSON.stringify(url));
-        console.log("PATH INFO: ", JSON.stringify(info));
+        debug && console.log("URL INFO: ", JSON.stringify(url));
+        debug && console.log("PATH INFO: ", JSON.stringify(info));
 
         var rel_path;
         var load_file = false;
         var type;
         if(!info.is_file) {
             type = get_type(ROOT_FILE);
-            console.log("TYPE: PATH");
+            debug && console.log("TYPE: PATH");
             rel_path = url.path + ROOT_FILE;
             load_file = true;
         } else {
-            console.log("TYPE: FILE");
+            debug && console.log("TYPE: FILE");
             type = get_type(info.file);
 
             if(valid_type(type)){
-                console.log("VALID TYPE");
+                debug && console.log("VALID TYPE");
                 rel_path = url.path;
                 load_file = true;
             } else {
-                console.log("INVALID TYPE", info.file);
+                debug && console.log("INVALID TYPE", info.file);
             }
         }
 
         var fpath = WEB_FOLDER + rel_path;
-        console.log("WEB_FOLDER: ", WEB_FOLDER);
-        console.log("rel_path: ", rel_path);
-        console.log("RESULT PATH: ", fpath);
+        debug && console.log("WEB_FOLDER: ", WEB_FOLDER);
+        debug && console.log("rel_path: ", rel_path);
+        debug && console.log("RESULT PATH: ", fpath);
         if(load_file && fs.existsSync(fpath)) {
-            console.log("TRY LOAD: ", fpath);
+            debug && console.log("TRY LOAD: ", fpath);
 
 
             var type_info = Config.types[type];
-            console.log("type_info", JSON.stringify(type_info));
+            debug && console.log("type_info", JSON.stringify(type_info));
 
             if (type_info.binary) {
                 var contents = fs.readFileSync(fpath);
@@ -62,21 +63,21 @@ var requestHandler = function(request, response) {
                 response.end();
             } else {
                 fs.readFile(fpath, 'utf8', function (err, contents) {
-                    console.log("LOAD RESPONSE: ", fpath);
+                    debug && console.log("LOAD RESPONSE: ", fpath);
                     response.writeHead(200, {
                         'Content-Type': type_info.mime
                     });
-                    console.log("BINARY: false");
+                    debug && console.log("BINARY: false");
                     response.end(contents);
                 });
             }
         } else {
-            console.log("NO LOADED: ", fpath);
+            debug && console.log("NO LOADED: ", fpath);
             response.writeHead(404, {"Content-Type": "text/plain; charset=utf-8" });
             response.end("url invalid or file does not exist");
         }
     } else {
-        console.log("INVALID URL: ", request.url);
+        debug && console.log("INVALID URL: ", request.url);
         response.writeHead(404, {"Content-Type": "text/plain; charset=utf-8" });
         response.end("url invalid");
     }
@@ -85,9 +86,9 @@ var requestHandler = function(request, response) {
 var server = http.createServer(requestHandler);
 server.listen(port, function (err) {
     if (err) {
-        return console.log('something bad happened', err);
+        return debug && console.log('something bad happened', err);
     }
-    console.log("server is listening on port: " + port);
+    debug && console.log("server is listening on port: " + port);
 });
 
 var process_url = function (_url) {
