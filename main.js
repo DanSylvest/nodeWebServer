@@ -11,11 +11,12 @@ var port = Config.port || 3000;
 var ROOT_FILE = Config.default_file || "index.html";
 var WEB_FOLDER = Config.web_root || __dirname;
 var debug = Config.debug;
+var info = Config.info;
 
 var requestHandler = function(request, response) {
     debug && console.log("");
     debug && console.log("");
-    debug && console.log("INCOMING URL: ", request.url);
+    info && console.log("INCOMING URL: ", request.url);
     if(valid_url(request.url)) { // check chars in url
         var url = process_url(request.url); // get path and query
         var info = path_info(url.path); // getr info file or not file
@@ -87,9 +88,9 @@ var requestHandler = function(request, response) {
 var server = http.createServer(requestHandler);
 server.listen(port, function (err) {
     if (err) {
-        return debug && console.log('something bad happened', err);
+        return info && console.log('something bad happened', err);
     }
-    debug && console.log("server is listening on port: " + port);
+    info && console.log("server is listening on port: " + port);
 });
 
 var process_url = function (_url) {

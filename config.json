@@ -3,6 +3,7 @@
     "default_file": "index.html",
     "web_root": "/root/work/mapper-beta",
     "debug": false,
+    "info": true,
     "types": {
         "html":   {"mime":"text/html"},
         "txt":    {"mime":"text/plain"},
