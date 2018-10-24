@@ -10,51 +10,51 @@ var Config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 var port = Config.port || 3000;
 var ROOT_FILE = Config.default_file || "index.html";
 var WEB_FOLDER = Config.web_root || __dirname;
-var debug = Config.debug;
-var info = Config.info;
+var _debug = Config._debug;
+var _info = Config.info;
 
 var requestHandler = function(request, response) {
-    debug && console.log("");
-    debug && console.log("");
-    info && console.log("INCOMING URL: ", request.url);
+    _debug && console.log("");
+    _debug && console.log("");
+    _info && console.log("INCOMING URL: ", request.url);
     if(valid_url(request.url)) { // check chars in url
         var url = process_url(request.url); // get path and query
         var info = path_info(url.path); // getr info file or not file
 
-        debug && console.log("URL INFO: ", JSON.stringify(url));
-        debug && console.log("PATH INFO: ", JSON.stringify(info));
+        _debug && console.log("URL INFO: ", JSON.stringify(url));
+        _debug && console.log("PATH INFO: ", JSON.stringify(info));
 
         var rel_path;
         var load_file = false;
         var type;
         if(!info.is_file) {
             type = get_type(ROOT_FILE);
-            debug && console.log("TYPE: PATH");
+            _debug && console.log("TYPE: PATH");
             rel_path = url.path + ROOT_FILE;
             load_file = true;
         } else {
-            debug && console.log("TYPE: FILE");
+            _debug && console.log("TYPE: FILE");
             type = get_type(info.file);
 
             if(valid_type(type)){
-                debug && console.log("VALID TYPE");
+                _debug && console.log("VALID TYPE");
                 rel_path = url.path;
                 load_file = true;
             } else {
-                debug && console.log("INVALID TYPE", info.file);
+                _debug && console.log("INVALID TYPE", info.file);
             }
         }
 
         var fpath = WEB_FOLDER + rel_path;
-        debug && console.log("WEB_FOLDER: ", WEB_FOLDER);
-        debug && console.log("rel_path: ", rel_path);
-        debug && console.log("RESULT PATH: ", fpath);
+        _debug && console.log("WEB_FOLDER: ", WEB_FOLDER);
+        _debug && console.log("rel_path: ", rel_path);
+        _debug && console.log("RESULT PATH: ", fpath);
         if(load_file && fs.existsSync(fpath)) {
-            debug && console.log("TRY LOAD: ", fpath);
+            _debug && console.log("TRY LOAD: ", fpath);
 
 
             var type_info = Config.types[type];
-            debug && console.log("type_info", JSON.stringify(type_info));
+            _debug && console.log("type_info", JSON.stringify(type_info));
 
             if (type_info.binary) {
                 var contents = fs.readFileSync(fpath);
@@ -65,21 +65,21 @@ var requestHandler = function(request, response) {
                 response.end();
             } else {
                 fs.readFile(fpath, 'utf8', function (err, contents) {
-                    debug && console.log("LOAD RESPONSE: ", fpath);
+                    _debug && console.log("LOAD RESPONSE: ", fpath);
                     response.writeHead(200, {
                         'Content-Type': type_info.mime
                     });
-                    debug && console.log("BINARY: false");
+                    _debug && console.log("BINARY: false");
                     response.end(contents);
                 });
             }
         } else {
-            debug && console.log("NO LOADED: ", fpath);
+            _debug && console.log("NO LOADED: ", fpath);
             response.writeHead(404, {"Content-Type": "text/plain; charset=utf-8" });
             response.end("url invalid or file does not exist");
         }
     } else {
-        debug && console.log("INVALID URL: ", request.url);
+        _debug && console.log("INVALID URL: ", request.url);
         response.writeHead(404, {"Content-Type": "text/plain; charset=utf-8" });
         response.end("url invalid");
     }
@@ -88,9 +88,9 @@ var requestHandler = function(request, response) {
 var server = http.createServer(requestHandler);
 server.listen(port, function (err) {
     if (err) {
-        return info && console.log('something bad happened', err);
+        return _info && console.log('something bad happened', err);
     }
-    info && console.log("server is listening on port: " + port);
+    _info && console.log("server is listening on port: " + port);
 });
 
 var process_url = function (_url) {
