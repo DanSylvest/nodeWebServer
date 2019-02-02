@@ -115,7 +115,8 @@ var process_url = function (_url) {
 
 
 var valid_url = function (_url) {
-    var match = _url.match(/[^a-zA-Z0-9_\-+=?\\/\.&]/);
+    var left = _url.split("?")[0];
+    var match = left.match(/[^a-zA-Z0-9_\-+=?\\/\.&]/);
     return !match;
 };
 
