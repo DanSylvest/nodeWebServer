@@ -1,0 +1,10 @@
+[Service]
+# Даем знать systemd, что этот сервис представляет из себя лишь 1 процесс. Man page хорошо описывает доступные опции.
+Type=oneshot
+# Выполнить эту команду при запуске сервиса.
+ExecStart=/bin/sh -c '/root/work/node_web_server/web.sh' start
+# Выполнить эту команду при остановке сервиса.
+ExecStop=/bin/sh -c '/root/work/node_web_server/web.sh' stop
+
+[Install]
+WantedBy=multi-user.target
