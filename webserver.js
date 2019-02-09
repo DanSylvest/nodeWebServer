@@ -143,12 +143,15 @@ var path_info = function (_path) {
         is_file: false
     };
 
-    var arr = _path.split("/");
+    var stats = fs.statSync(WEB_FOLDER.replace(/\\/gm, "/") + _path.substring(1, _path.length));
+    var is_file = !stats.isDirectory();
 
-    var end = arr[arr.length - 1];
-    if(end != ""){
+    if(is_file){
+        var arr = _path.split("/");
+        var end = arr[arr.length - 1];
         info.is_file = true;
         info.file = end;
     }
+
     return info;
 };
