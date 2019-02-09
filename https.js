@@ -6,7 +6,7 @@
 var fs = require('fs');
 var Config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 
-var port = Config.port || 3000;
+var port = /*Config.port || 3000*/443;
 var ROOT_FILE = Config.default_file || "index.html";
 var WEB_FOLDER = Config.web_root || __dirname;
 var _debug = Config._debug;
@@ -98,6 +98,7 @@ server.listen(port, function (err) {
     if (err) {
         return _info && console.log('something bad happened', err);
     }
+
     _info && console.log("server is listening on port: " + port);
 });
 
