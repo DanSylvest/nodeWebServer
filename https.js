@@ -88,9 +88,9 @@ var requestHandler = function(request, response) {
 var https = require('https');
 
 var options = {
-    key: fs.readFileSync('private.key'),
-    cert: fs.readFileSync('certificate.crt'),
-    ca: fs.readFileSync('ca_bundle.crt'),
+    key: fs.readFileSync('private.key', "utf8"),
+    cert: fs.readFileSync('certificate.crt', "utf8"),
+    ca: fs.readFileSync('ca_bundle.crt', "utf8"),
 };
 
 var server = https.createServer(options, requestHandler);
