@@ -87,9 +87,9 @@ var requestHandler = function(request, response) {
 
 var https = require('https');
 
-const options = {
-    key: fs.readFileSync('agent2-key.pem'),
-    cert: fs.readFileSync('agent2-cert.pem')
+var options = {
+    key: fs.readFileSync('private.key'),
+    cert: fs.readFileSync('certificate.crt')
 };
 
 var server = https.createServer(options, requestHandler);
@@ -149,12 +149,18 @@ var path_info = function (_path) {
         is_file: false
     };
 
-    var arr = _path.split("/");
+    var p = WEB_FOLDER.replace(/\\/gm, "/") + _path;
+    if(fs.existsSync(p)) {
+        var stats = fs.statSync(p);
+        var is_file = !stats.isDirectory();
 
-    var end = arr[arr.length - 1];
-    if(end != ""){
-        info.is_file = true;
-        info.file = end;
+        if (is_file) {
+            var arr = _path.split("/");
+            var end = arr[arr.length - 1];
+            info.is_file = true;
+            info.file = end;
+        }
     }
+
     return info;
 };
