@@ -3,11 +3,10 @@
  */
 
 
-var http = require('http');
 var fs = require('fs');
 var Config = JSON.parse(fs.readFileSync("config.json", "utf8"));
 
-var port = Config.port || 3000;
+var port = /*Config.port || 3000*/443;
 var ROOT_FILE = Config.default_file || "index.html";
 var WEB_FOLDER = Config.web_root || __dirname;
 var _debug = Config._debug;
@@ -85,11 +84,21 @@ var requestHandler = function(request, response) {
     }
 };
 
-var server = http.createServer(requestHandler);
+
+var webserver = require('https');
+
+var options = {
+    key: fs.readFileSync('private.key', "utf8"),
+    cert: fs.readFileSync('certificate.crt', "utf8"),
+    ca: fs.readFileSync('ca_bundle.crt', "utf8"),
+};
+
+var server = webserver.createServer(options, requestHandler);
 server.listen(port, function (err) {
     if (err) {
         return _info && console.log('something bad happened', err);
     }
+
     _info && console.log("server is listening on port: " + port);
 });
 
@@ -115,8 +124,7 @@ var process_url = function (_url) {
 
 
 var valid_url = function (_url) {
-    var left = _url.split("?")[0];
-    var match = left.match(/[^a-zA-Z0-9_\-+=?\\/\.&]/);
+    var match = _url.match(/[^a-zA-Z0-9_\-+=?\\/\.&]/);
     return !match;
 };
 
