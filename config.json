@@ -1,12 +1,13 @@
 {
     "port": 80,
     "default_file": "index.html",
-    "web_root": "/root/work/mapper-beta",
+    "web_root": "A:\\custom_projects\\",
     "debug": false,
     "info": true,
     "types": {
         "html":   {"mime":"text/html"},
         "txt":    {"mime":"text/plain"},
+        "":       {"mime":"text/plain"},
         "css":    {"mime":"text/css"},
         "svg":    {"mime":"image/svg+xml"},
         "js":     {"mime":"application/x-javascript"},
