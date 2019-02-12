@@ -123,7 +123,7 @@ var process_url = function (_url) {
 };
 
 var valid_url = function (_url) {
-    var match = _url.match(/[^a-zA-Z0-9_\-+=?\\/\.&]/);
+    var match = _url.match(/[^a-zA-Z0-9_\-:%+=?\\/\.&]/);
     return !match;
 };
 
@@ -167,22 +167,22 @@ var path_info = function (_path) {
 };
 
 
-var http = require('http');
-
-var httpServer = http.createServer(function (request, response) {
-    console.log("http:80: ",request.url);
-
-    // HTTP/1.1 301 Moved Permanently
-    // Location: http://www.example.org/index.asp
-
-    response.writeHead(301, {
-        "Content-Type": "text/plain; charset=utf-8"
-    });
-});
-httpServer.listen(80, function (err) {
-    if (err) {
-        return _info && console.log('something bad happened', err);
-    }
-
-    _info && console.log("http server is listening on port: " + 80);
-});
+// var http = require('http');
+//
+// var httpServer = http.createServer(function (request, response) {
+//     console.log("http:80: ",request.url);
+//
+//     // HTTP/1.1 301 Moved Permanently
+//     // Location: http://www.example.org/index.asp
+//
+//     response.writeHead(301, {
+//         "Content-Type": "text/plain; charset=utf-8"
+//     });
+// });
+// httpServer.listen(80, function (err) {
+//     if (err) {
+//         return _info && console.log('something bad happened', err);
+//     }
+//
+//     _info && console.log("http server is listening on port: " + 80);
+// });
